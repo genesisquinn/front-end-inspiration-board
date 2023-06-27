@@ -37,9 +37,9 @@ const NewBoardForm = ({handleBoardSubmit}) => {
                 <input type = "text" id="owner" name="boardOwner" value={owner} onChange={handleOwnerChange} />
             </div>
             <div className="preview-section">
-                <h3>Preview:</h3>
-                <p>Title: {title}</p>
-                <p>Owner: {owner}</p>
+                <h4>Preview:</h4>
+                <p>{title}</p>
+                <p>{owner}</p>
             </div>
             <input type="submit" value="Submit"/>
         </form>
