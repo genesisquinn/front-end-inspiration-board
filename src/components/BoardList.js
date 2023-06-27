@@ -15,7 +15,7 @@ const BoardList = (props) =>{
 
     return(
       <div className='dropdown'>
-        <button className='dropdown-btn' onClick={toggleDropdown}>Board</button>
+        <button className='dropdown-btn' onClick={toggleDropdown}>Boards</button>
         <ul className={`dropdown-menu ${showList}`}>
           {props.boardData.map((board) => (
             <Board

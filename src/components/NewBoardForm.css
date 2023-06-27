@@ -1,0 +1,14 @@
+.new-board-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+  
+.form-group {
+    margin-bottom: 10px;
+}
+  
+label {
+    margin-right: 5px;
+}

@@ -1,5 +1,7 @@
+import React, {useState} from 'react';
 import BoardList from './components/BoardList.js';
 import './App.css';
+import NewBoardForm from './components/NewBoardForm.js';
 
 const boardList = [
   {
@@ -20,6 +22,16 @@ const boardList = [
 ]
 
 function App() {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleCreateNewBoard = () => {
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -29,9 +41,18 @@ function App() {
             <BoardList boardData={boardList}/>
           </div>
           <div className='menu-item'>
-          <button className='dropdown-btn'>Create New Board</button>
+          <button className='dropdown-btn' onClick={handleCreateNewBoard}>Create A New Board</button>
           </div>
         </div>
+        {showPopup && (
+          <div className='popup'>
+            <div className='popup-content'>
+              <h2>Create A New Board</h2>
+              {/* this handleBoardSubmit will be used to pass the post request */}
+              <NewBoardForm handleBoardSubmit={handleClosePopup} />
+            </div>
+          </div>
+        )}
       </header>
       <section>
         <h1>Selected Board Section</h1>
