@@ -1,6 +1,22 @@
+@font-face {
+  font-family: mainFamily;
+  src: url(fonts/ArchitectsDaughter-Regular.ttf);
+
+}
+
+@font-face {
+  font-family: secondFamily;
+  src: url(fonts/SedgwickAve-Regular.ttf);
+}
+
+* {
+  font-family: mainFamily;
+}
+
 .App {
   /* text-align: center; */
   background-color: #fdd195;
+
 }
 
 .App-header {
@@ -129,8 +145,8 @@
 }
 
 .popup-content input[type="submit"] {
-  background-color: #f4ecb8;
-  color: black;
+  background-color: #204376;
+  color: #f4ecb8;
   font-size: 16px;
   padding: 10px 20px;
   border: none;
@@ -139,7 +155,8 @@
 }
 
 .popup-content input[type="submit"]:hover {
-  background-color: #e0d99b;
+  background-color: #f4ecb8;
+  color:#204376;
 }
 
 .close-btn {
