@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 const NewBoardForm = ({handleBoardSubmit}) => {
     const[title, setTitle] = useState('');
-    const[owner, setOwner] = useState('')
+    const[owner, setOwner] = useState('');
+    const[showForm, setShowForm] = useState(true);
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -25,9 +26,18 @@ const NewBoardForm = ({handleBoardSubmit}) => {
         setOwner('');
         handleBoardSubmit();
     };
-
+    
+    const handleClose =(event) =>{
+        setShowForm(false);
+    };
     return (
         <form className='new-board-form' onSubmit={handleFormSubmit}>
+            <div>
+              <button className="close-btn" onClick={handleClose}>X</button>
+            </div>
+            <div>
+              <h2>Create A New Board</h2>
+            </div>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input type = "text" id="title" name="boardTitle" value={title} onChange={handleTitleChange} />
