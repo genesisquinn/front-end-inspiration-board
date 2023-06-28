@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import BoardList from './components/BoardList.js';
 import CardList from './components/CardList.js';
 import NewBoardForm from './components/NewBoardForm.js';
+import NewCardForm from './components/NewCardForm.js';
 import './App.css';
 
 
@@ -41,6 +42,7 @@ const cardList = [
 function App() {
   const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
   const [showPopup, setShowPopup] = useState(false);
+  const [showCardPopup, setShowCardPopup] = useState(false);
   //state to handle the selected board section
   const [selectedBoard, setSelectedBoard] = useState(null);
 
@@ -49,8 +51,16 @@ function App() {
     setShowPopup(true);
   };
 
+  const handleCreateNewCard = () => {
+    setShowCardPopup(true);
+  };
+
   const handleClosePopup = () => {
     setShowPopup(false);
+  };
+
+  const handleCloseCardPopup = () => {
+    setShowCardPopup(false);
   };
 
   const handleBoardSelection = (title, owner) => {
@@ -70,7 +80,7 @@ function App() {
             />
           </div>
           <div className='menu-item'>
-          <button className='dropdown-btn' onClick={handleCreateNewBoard}>Create A New Board</button>
+            <button onClick={handleCreateNewBoard}>Create A New Board</button>
           </div>
         </div>
         {showPopup && (
@@ -89,8 +99,22 @@ function App() {
         {selectedBoard && (
           <div className='board-container'>
             <div className='left-column'>
-              <h3>Cards for {selectedBoard.title}</h3>
-              <p>By {selectedBoard.owner}</p>
+              <div className='board-name-displayed'>
+                <h3>Cards for {selectedBoard.title}</h3>
+                <p>By {selectedBoard.owner}</p>
+              </div>
+              <div className='menu-item'>
+                <button onClick={handleCreateNewCard}>Create A New Card</button>
+              </div>
+              {/* this handleCardSubmit will be used to pass the post request */}
+              {showCardPopup && (
+                <div className='popup'>
+                  <div className='popup-content'>
+                    {/* this handleCardSubmit will be used to pass the post request */}
+                    <NewCardForm  handleCardSubmit={handleCloseCardPopup}/>
+                  </div>
+                </div>
+              )}
             </div>
             <CardList cardData = {cardList}/>
           </div>
