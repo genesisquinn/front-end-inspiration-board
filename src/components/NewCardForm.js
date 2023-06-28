@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from 'prop-types';
+import './NewCardForm.css';
 
 const NewCardForm = ({handleCardSubmit}) => {
     const[message, setMessage] = useState('');
@@ -31,10 +32,10 @@ const NewCardForm = ({handleCardSubmit}) => {
     return (
         <form className='new-board-form' onSubmit={handleFormSubmit}>
             <div>
-              <button className="close-btn" onClick={handleClose}>X</button>
+              <button className="close-button" onClick={handleClose}>X</button>
             </div>
             <div>
-              <h2>Create A New Board</h2>
+              <h2>Create A New Card</h2>
             </div>
             <div className="form-group">
                 <label htmlFor="message">Message</label>

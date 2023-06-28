@@ -103,7 +103,7 @@ function App() {
                 <h3>Cards for {selectedBoard.title}</h3>
                 <p>By {selectedBoard.owner}</p>
               </div>
-              <div className='menu-item'>
+              <div className='menu-item menu-card'>
                 <button onClick={handleCreateNewCard}>Create A New Card</button>
               </div>
               {/* this handleCardSubmit will be used to pass the post request */}
