@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import Board from './Board';
 import './BoardList.css';
 
@@ -23,11 +24,27 @@ const BoardList = (props) =>{
               title = {board.title}
               owner = {board.owner}
               id= {board.id}
+              onBoardSelect = {props.onBoardSelect}
+              // hideDropdown = {props.hideDropdown}
             />
           ))}
         </ul>
       </div>
     )
-}
+};
+
+BoardList.propTypes = {
+  boardData: PropTypes.arrayOf(
+    PropTypes.shape(
+      {
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        owner: PropTypes.string.isRequired,
+      }
+    )
+  ).isRequired,
+  onBoardSelect: PropTypes.func,
+  // hideDropdown: PropTypes.func,
+};
 
 export default BoardList;
