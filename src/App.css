@@ -45,7 +45,6 @@
   cursor: pointer;
   position: relative;
   z-index:1;
-  /* box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.9); */
 }
 
 .menu-item button::before {
@@ -169,14 +168,12 @@
   margin-top: 10px;
   position: relative;
   top: 10px;
-  left: 35vh;
+  left: 34vh;
 }
 
 .board-container {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
-  /* grid-template-columns: 1fr 1fr; */
-  /* grid-gap: 10px; */
 }
 
 .left-column {
@@ -264,6 +261,13 @@
   height: 100%;
   background-color: black;
   z-index: -2;
+}
+
+.menu-card button{
+  color:white;
+}
+.menu-card button::before{
+  background-color: #4A929F;
 }
 
 .footer {
