@@ -22,6 +22,7 @@ const boardList = [
 ]
 
 function App() {
+  const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
   const [showPopup, setShowPopup] = useState(false);
   //state to handle the selected board section
   const [selectedBoard, setSelectedBoard] = useState(null);
@@ -105,8 +106,8 @@ function App() {
           </div>
         )}
       </section>
-      <footer>
-        <h1>footer</h1>
+      <footer className='footer'>
+        <h1>Created by: {creators.join(', ')}</h1>
       </footer>
     </div>
   );

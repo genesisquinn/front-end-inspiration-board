@@ -229,6 +229,11 @@
   z-index: -2;
 }
 
+.footer {
+  text-align: center;
+  font-size: 10px;
+  padding-top: 20px;
+}
 @media screen and (max-width: 768px) {
   .menu-container {
     grid-template-columns: 1fr 1fr;
