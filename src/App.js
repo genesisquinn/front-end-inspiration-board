@@ -54,7 +54,7 @@ function App() {
         )}
       </header>
       <section>
-        <h1>Selected Board Section</h1>
+        <h1>Selected Board Section- just checking that this is working</h1>
       </section>
       <footer>
         <h1>footer</h1>
