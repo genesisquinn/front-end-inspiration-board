@@ -206,6 +206,7 @@
   opacity: 1;
   z-index: -1;
 }
+
 .board-name-displayed::after {
   content: "";
   position: absolute;
