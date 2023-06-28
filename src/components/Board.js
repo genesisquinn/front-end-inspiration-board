@@ -18,7 +18,6 @@ Board.propTypes = {
   title: PropTypes.string.isRequired,
   owner: PropTypes.string.isRequired,
   onBoardSelect: PropTypes.func,
-//   hideDropdown: PropTypes.func,
 };
 
 export default Board;

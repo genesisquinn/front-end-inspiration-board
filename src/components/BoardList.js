@@ -25,7 +25,6 @@ const BoardList = (props) =>{
               owner = {board.owner}
               id= {board.id}
               onBoardSelect = {props.onBoardSelect}
-              // hideDropdown = {props.hideDropdown}
             />
           ))}
         </ul>
@@ -44,7 +43,6 @@ BoardList.propTypes = {
     )
   ).isRequired,
   onBoardSelect: PropTypes.func,
-  // hideDropdown: PropTypes.func,
 };
 
 export default BoardList;

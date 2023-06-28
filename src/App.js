@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import BoardList from './components/BoardList.js';
-import './App.css';
+import CardList from './components/CardList.js';
 import NewBoardForm from './components/NewBoardForm.js';
+import './App.css';
+
 
 const boardList = [
   {
@@ -21,13 +23,27 @@ const boardList = [
   },
 ]
 
+const cardList = [
+  {
+    id:1,
+    message: "Fake it until you make it",
+    likes: 3,
+    board_id: 1,
+  },
+  {
+    id:2,
+    message: "Fingilo hasta conseguirlo",
+    likes: 2,
+    board_id: 3,
+  },
+]
+
 function App() {
   const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
   const [showPopup, setShowPopup] = useState(false);
   //state to handle the selected board section
   const [selectedBoard, setSelectedBoard] = useState(null);
-  //state to handle dropdown menu (hide it after clicking on one board)
-  // const [showDropdown, setShowDropdown] = useState(false);
+
 
   const handleCreateNewBoard = () => {
     setShowPopup(true);
@@ -39,13 +55,8 @@ function App() {
 
   const handleBoardSelection = (title, owner) => {
     setSelectedBoard({title, owner});
-    // setShowDropdown(false);
   };
   
-  // //Toggle the showDropdown state
-  // const handleToggleDropdown = () => {
-  //   setShowDropdown(false);
-  // };
 
   return (
     <div className="App">
@@ -56,8 +67,6 @@ function App() {
             <BoardList 
               boardData={boardList} 
               onBoardSelect = {handleBoardSelection}
-              // hideDropdown = {handleToggleDropdown}
-              // showDropdown = {showDropdown}
             />
           </div>
           <div className='menu-item'>
@@ -83,26 +92,7 @@ function App() {
               <h3>Cards for {selectedBoard.title}</h3>
               <p>By {selectedBoard.owner}</p>
             </div>
-            <div className='cards-container'>
-                <div className='card'>
-                  un mensaje
-                </div>
-                <div className='card'>
-                  otro mensaje
-                </div>
-                <div className='card'>
-                  un mensaje
-                </div>
-                <div className='card'>
-                  otro mensaje
-                </div>
-                <div className='card'>
-                  un mensaje
-                </div>
-                <div className='card'>
-                  otro mensaje
-                </div>
-            </div>
+            <CardList cardData = {cardList}/>
           </div>
         )}
       </section>
