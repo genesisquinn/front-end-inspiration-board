@@ -47,7 +47,6 @@ function App() {
         {showPopup && (
           <div className='popup'>
             <div className='popup-content'>
-              <h2>Create A New Board</h2>
               {/* this handleBoardSubmit will be used to pass the post request */}
               <NewBoardForm handleBoardSubmit={handleClosePopup} />
             </div>
