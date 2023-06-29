@@ -6,7 +6,7 @@ import NewBoardForm from './components/NewBoardForm.js';
 import NewCardForm from './components/NewCardForm.js';
 import './App.css';
 
-const {REACT_APP_BACKEND_URL} = process.env;
+
 
 const cardList = [
   {
@@ -22,31 +22,33 @@ const cardList = [
     board_id: 3,
   },
   {
-    id:1,
+    id:3,
     message: "a new message",
     likes: 3,
     board_id: 1,
   },
   {
-    id:2,
+    id:4,
     message: "un nuevo mensaje",
     likes: 2,
     board_id: 3,
   },
   {
-    id:1,
+    id:5,
     message: "another phrase",
     likes: 3,
     board_id: 1,
   },
   {
-    id:2,
+    id:6,
     message: "otra frase",
     likes: 2,
     board_id: 3,
   },
 ]
 const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
+
+const {REACT_APP_BACKEND_URL} = process.env;
 
 function App() {
   const [showPopup, setShowPopup] = useState(false);
@@ -67,11 +69,12 @@ function App() {
     axios
       .post(`${REACT_APP_BACKEND_URL}/boards`, data)
       .then((res) => {
-        setBoardData(prev => [(res.data), ...prev])
+        const newBoard = res.data.board;
+        setBoardData(prev => [newBoard, ...prev]);
       })
       .catch((err) => console.log(err));
   };
-
+  
   const handleCreateNewCard = () => {
     setShowCardPopup(true);
   };

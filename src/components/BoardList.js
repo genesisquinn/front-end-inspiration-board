@@ -8,9 +8,10 @@ const BoardList = (props) =>{
     //lift the state up to handle the dropdown menu with the list of boards.
     const [isOpen, setIsOpen] = useState(false);
     const [selectedBoard, setSelectedBoard] = useState(null);
-
+    
     const toggleDropdown = () => {
         setIsOpen((prevState) => !prevState);
+        console.log(props.boardData);
       };
     
     const handleBoardSelection = (title, owner) => {
@@ -36,7 +37,6 @@ const BoardList = (props) =>{
               owner = {board.owner}
               id= {board.id}
               onBoardSelect={handleBoardSelection}
-              // onBoardSelect = {props.onBoardSelect}
             />
           ))}
         </ul>
