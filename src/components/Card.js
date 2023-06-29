@@ -7,8 +7,8 @@ const Card = (props) => {
             <h2>{props.message}</h2>
             <section>
                 <p>{props.likes}</p>
-                <button onClick={(event) => props.onLike(props.id)}>+1</button>
-                <button onClick={(event) => props.onDeleteCard(props.id)}>Delete</button>
+                <button onClick={(event) => props.onLike(props.id)}>⬆️</button>
+                <button onClick={(event) => props.onDeleteCard(props.id)}>delete</button>
             </section>
         </div>
     )
