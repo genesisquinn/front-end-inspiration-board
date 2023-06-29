@@ -14,11 +14,11 @@ const BoardList = (props) =>{
         console.log(props.boardData);
       };
     
-    const handleBoardSelection = (title, owner) => {
-        setSelectedBoard({ title, owner });
+    const handleBoardSelection = (title, owner, id) => {
+        setSelectedBoard({ title, owner, id });
         setIsOpen(false); // Hide the dropdown menu
         if (props.onBoardSelect) {
-          props.onBoardSelect(title, owner);
+          props.onBoardSelect(title, owner, id);
         }
     };
 
