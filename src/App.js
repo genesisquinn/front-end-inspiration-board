@@ -37,6 +37,30 @@ const cardList = [
     likes: 2,
     board_id: 3,
   },
+  {
+    id:1,
+    message: "a new message",
+    likes: 3,
+    board_id: 1,
+  },
+  {
+    id:2,
+    message: "un nuevo mensaje",
+    likes: 2,
+    board_id: 3,
+  },
+  {
+    id:1,
+    message: "another phrase",
+    likes: 3,
+    board_id: 1,
+  },
+  {
+    id:2,
+    message: "otra frase",
+    likes: 2,
+    board_id: 3,
+  },
 ]
 
 function App() {
