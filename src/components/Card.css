@@ -26,6 +26,7 @@
   
   .card button {
     background-color: #fff;
+    color:red;
     border: none;
     cursor: pointer;
     font-size: 14px;
