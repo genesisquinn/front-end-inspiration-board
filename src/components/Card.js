@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faHeart } from "@fortawesome/free-solid-svg-icons";
 import './Card.css'
 
 const Card = (props) => {
@@ -6,9 +8,17 @@ const Card = (props) => {
         <div className="card">
             <h2>{props.message}</h2>
             <section>
-                <p>{props.likes}</p>
+                <div className="heart-container">
+                  <FontAwesomeIcon 
+                    icon={faHeart} 
+                    className="heart-icon"
+                    size="2x" />
+                  <span className="heart-count">{props.likes}</span>
+                </div>
                 <button onClick={(event) => props.onLike(props.id)}>⬆️</button>
-                <button onClick={(event) => props.onDeleteCard(props.id)}>delete</button>
+                <button onClick={(event) => props.onDeleteCard(props.id)}>
+                    <FontAwesomeIcon icon={faTrashCan} className="trash-icon" size="2x" />
+                </button>
             </section>
         </div>
     )

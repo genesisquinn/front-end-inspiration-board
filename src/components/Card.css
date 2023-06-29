@@ -2,8 +2,8 @@
   /* background-color: white; */
   border: 1px solid #ccc;
   padding: 10px;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   margin-bottom: 20px;
   position: relative;
   z-index: 1;
@@ -36,7 +36,7 @@
 }
   
   .card h2 {
-    font-size: 16px;
+    font-size: 20px;
     margin: 0;
     text-align: center;
     margin-top: auto;
@@ -67,6 +67,23 @@
     outline: none;
   }
   
+
+.heart-container {
+  display: flex;
+  align-items: center;
+}
+
+.heart-icon {
+  margin-right:-18px;
+  color: rgb(224, 21, 204);
+}
+
+.heart-count {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
 /* Responsive styles for screens with a maximum width of 600px */
 @media (max-width: 700px) {
   .card {
@@ -79,6 +96,43 @@
     left: 5px;
     width: calc(100% - 10px);
     height: calc(100% - 10px);
+  }
+
+  .heart-icon {
+    margin-right:-8px;
+    color: rgb(224, 21, 204);
+  }
+}
+
+@media (max-width: 920px) {
+  .card {
+    /* Adjust card styles for mobile screens */
+    padding: 5px;
+    margin-left: 10px;
+    width: 10vh;
+    height: auto;
+  }
+
+  .card h2 {
+    /* Adjust heading styles for mobile screens */
+    font-size: 14px;
+  }
+
+  .card section {
+    /* Adjust section styles for mobile screens */
+    margin-top: 20px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .card p {
+    /* Adjust paragraph styles for mobile screens */
+    font-size: 12px;
+  }
+
+  .card button {
+    /* Adjust button styles for mobile screens */
+    font-size: 12px;
   }
 }
 
@@ -100,6 +154,7 @@
   .card section {
     /* Adjust section styles for mobile screens */
     margin-top: 20px;
+    margin-left: -5px;
     flex-direction: row;
     align-items: flex-start;
   }
