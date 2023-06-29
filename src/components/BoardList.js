@@ -7,16 +7,27 @@ import './BoardList.css';
 const BoardList = (props) =>{
     //lift the state up to handle the dropdown menu with the list of boards.
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedBoard, setSelectedBoard] = useState(null);
 
     const toggleDropdown = () => {
         setIsOpen((prevState) => !prevState);
       };
     
+    const handleBoardSelection = (title, owner) => {
+        setSelectedBoard({ title, owner });
+        setIsOpen(false); // Hide the dropdown menu
+        if (props.onBoardSelect) {
+          props.onBoardSelect(title, owner);
+        }
+    };
+
     const showList = isOpen ? 'open': '';
 
     return(
       <div className='dropdown'>
-        <button className='dropdown-btn' onClick={toggleDropdown}>Boards</button>
+        <button className='dropdown-btn' onClick={toggleDropdown}>
+          Boards
+        </button>
         <ul className={`dropdown-menu ${showList}`}>
           {props.boardData.map((board) => (
             <Board
@@ -24,7 +35,8 @@ const BoardList = (props) =>{
               title = {board.title}
               owner = {board.owner}
               id= {board.id}
-              onBoardSelect = {props.onBoardSelect}
+              onBoardSelect={handleBoardSelection}
+              // onBoardSelect = {props.onBoardSelect}
             />
           ))}
         </ul>
