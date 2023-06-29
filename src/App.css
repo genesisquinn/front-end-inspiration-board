@@ -36,6 +36,11 @@
   grid-gap: 100vh;
 }
 
+.menu-item {
+  position: relative;
+  z-index: 1;
+}
+
 .menu-item button{
   background-color: #f4ecb8;
   color: black;
