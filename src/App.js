@@ -46,9 +46,9 @@ const cardList = [
     board_id: 3,
   },
 ]
+const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
 
 function App() {
-  const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
   const [showPopup, setShowPopup] = useState(false);
   const [showCardPopup, setShowCardPopup] = useState(false);
   //state to handle the selected board section
@@ -64,7 +64,6 @@ function App() {
   }, []);
 
   const handleCreateNewBoard = (data) => {
-    // setShowPopup(true);
     axios
       .post(`${REACT_APP_BACKEND_URL}/boards`, data)
       .then((res) => {
@@ -149,6 +148,8 @@ function App() {
         )}
       </section>
       <footer className='footer'>
+        {/*I added this button in case we want to delete them */}
+        <button>delete all boards?</button>
         <h1>Created by: {creators.join(', ')}</h1>
       </footer>
     </div>
