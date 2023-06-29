@@ -67,6 +67,50 @@
     outline: none;
   }
   
+/* Responsive styles for screens with a maximum width of 600px */
+@media (max-width: 700px) {
+  .card {
+    width: 100%;
+    height: auto;
+  }
 
+  .card::after {
+    top: 5px;
+    left: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+}
 
+/* Responsive styles for screens with a maximum width of 480px (e.g., mobile devices) */
+@media (max-width: 480px) {
+  .card {
+    /* Adjust card styles for mobile screens */
+    padding: 5px;
+    margin-left: 20px;
+    width: 10vh;
+    height: auto;
+  }
 
+  .card h2 {
+    /* Adjust heading styles for mobile screens */
+    font-size: 14px;
+  }
+
+  .card section {
+    /* Adjust section styles for mobile screens */
+    margin-top: 20px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .card p {
+    /* Adjust paragraph styles for mobile screens */
+    font-size: 12px;
+  }
+
+  .card button {
+    /* Adjust button styles for mobile screens */
+    font-size: 12px;
+  }
+}

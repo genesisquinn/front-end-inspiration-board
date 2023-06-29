@@ -226,7 +226,7 @@
 }
 
 .card {
-  padding: 20px;
+  padding: 40px;
 }
 
 .card h2 {
@@ -293,4 +293,26 @@
     grid-template-columns: 1fr;
     grid-gap: 20px;
   }
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .close-btn {
+    background-color: #d34040;
+    color: black;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    position: relative;
+    top: 10px;
+    left: 27vh;
+  }
+
 }
