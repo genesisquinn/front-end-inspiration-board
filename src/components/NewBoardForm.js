@@ -1,35 +1,33 @@
 import React, {useState} from "react";
 import PropTypes from 'prop-types';
 
-const NewBoardForm = ({handleBoardSubmit}) => {
-    const[title, setTitle] = useState('');
-    const[owner, setOwner] = useState('');
-    const[showForm, setShowForm] = useState(true);
+const kInitialFormData = {
+    title: '',
+    owner: '',
+  };
 
-    const handleTitleChange = (event) => {
-        setTitle(event.target.value);
-    }
-
-    const handleOwnerChange = (event) => {
-        setOwner(event.target.value);
-      };
+const NewBoardForm = ({handleBoardSubmit, onClose}) => {
+    const [formData, setFormData] = useState(kInitialFormData);
     
+    const handleChange = (event) => {
+        const value = event.target.value;
+        const name= event.target.name;
+        setFormData(prev => ({
+            ...prev, [name]:value,
+        }));
+    };
+
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
-        const newBoard = {
-            title: title,
-            owner: owner,
-        }
-
-        setTitle("");
-        setOwner('');
-        handleBoardSubmit();
+        handleBoardSubmit({ ...formData });
+        onClose();
     };
     
     const handleClose =(event) =>{
-        setShowForm(false);
+        onClose();
     };
+
     return (
         <form className='new-board-form' onSubmit={handleFormSubmit}>
             <div>
@@ -40,16 +38,26 @@ const NewBoardForm = ({handleBoardSubmit}) => {
             </div>
             <div className="form-group">
                 <label htmlFor="title">Title</label>
-                <input type = "text" id="title" name="boardTitle" value={title} onChange={handleTitleChange} />
+                <input 
+                  type = "text" 
+                  id="title" 
+                  name="title" 
+                  value={formData.title} 
+                  onChange={handleChange} />
             </div>
             <div className="form-group">
                 <label htmlFor="owner">Owner's name</label>
-                <input type = "text" id="owner" name="boardOwner" value={owner} onChange={handleOwnerChange} />
+                <input 
+                  type = "text" 
+                  id="owner" 
+                  name="owner" 
+                  value={formData.owner} 
+                  onChange={handleChange} />
             </div>
             <div className="preview-section">
                 <h4>Preview:</h4>
-                <p>{title}</p>
-                <p>{owner}</p>
+                <p>{formData.title}</p>
+                <p>{formData.owner}</p>
             </div>
             <input type="submit" value="Submit"/>
         </form>
@@ -59,6 +67,7 @@ const NewBoardForm = ({handleBoardSubmit}) => {
 
 NewBoardForm.propTypes = {
     handleBoardSubmit: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
 };
 
 export default NewBoardForm;

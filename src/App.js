@@ -8,24 +8,6 @@ import './App.css';
 
 const {REACT_APP_BACKEND_URL} = process.env;
 
-// const boardList = [
-//   {
-//     id: 1,
-//     title: "New Board",
-//     owner: "Marta"
-//   },
-//   {
-//     id: 2,
-//     title: "Other Board",
-//     owner: "Jon"
-//   },
-//   {
-//     id: 3,
-//     title: "My Board",
-//     owner: "Lauren"
-//   },
-// ]
-
 const cardList = [
   {
     id:1,
@@ -81,12 +63,22 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleCreateNewBoard = () => {
-    setShowPopup(true);
+  const handleCreateNewBoard = (data) => {
+    // setShowPopup(true);
+    axios
+      .post(`${REACT_APP_BACKEND_URL}/boards`, data)
+      .then((res) => {
+        setBoardData(prev => [(res.data), ...prev])
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleCreateNewCard = () => {
     setShowCardPopup(true);
+  };
+
+  const handleOpenPopup = () => {
+    setShowPopup(true);
   };
 
   const handleClosePopup = () => {
@@ -114,14 +106,16 @@ function App() {
             />
           </div>
           <div className='menu-item'>
-            <button onClick={handleCreateNewBoard}>Create A New Board</button>
+            <button onClick={handleOpenPopup}>Create A New Board</button>
           </div>
         </div>
         {showPopup && (
           <div className='popup'>
             <div className='popup-content'>
               {/* this handleBoardSubmit will be used to pass the post request */}
-              <NewBoardForm handleBoardSubmit={handleClosePopup} />
+              <NewBoardForm 
+                handleBoardSubmit={handleCreateNewBoard}
+                onClose = {handleClosePopup} />
             </div>
           </div>
         )}
