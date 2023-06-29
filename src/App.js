@@ -1,28 +1,30 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import BoardList from './components/BoardList.js';
 import CardList from './components/CardList.js';
 import NewBoardForm from './components/NewBoardForm.js';
 import NewCardForm from './components/NewCardForm.js';
 import './App.css';
 
+const {REACT_APP_BACKEND_URL} = process.env;
 
-const boardList = [
-  {
-    id: 1,
-    title: "New Board",
-    owner: "Marta"
-  },
-  {
-    id: 2,
-    title: "Other Board",
-    owner: "Jon"
-  },
-  {
-    id: 3,
-    title: "My Board",
-    owner: "Lauren"
-  },
-]
+// const boardList = [
+//   {
+//     id: 1,
+//     title: "New Board",
+//     owner: "Marta"
+//   },
+//   {
+//     id: 2,
+//     title: "Other Board",
+//     owner: "Jon"
+//   },
+//   {
+//     id: 3,
+//     title: "My Board",
+//     owner: "Lauren"
+//   },
+// ]
 
 const cardList = [
   {
@@ -69,7 +71,15 @@ function App() {
   const [showCardPopup, setShowCardPopup] = useState(false);
   //state to handle the selected board section
   const [selectedBoard, setSelectedBoard] = useState(null);
+  //state to handle board Data
+  const [boardData, setBoardData] = useState([]);
 
+  useEffect(()=>{
+    axios
+      .get(`${REACT_APP_BACKEND_URL}/boards`)
+      .then((res) => setBoardData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleCreateNewBoard = () => {
     setShowPopup(true);
@@ -99,7 +109,7 @@ function App() {
         <div className='menu-container'>
           <div className='menu-item'>
             <BoardList 
-              boardData={boardList} 
+              boardData={boardData} 
               onBoardSelect = {handleBoardSelection}
             />
           </div>
