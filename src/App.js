@@ -8,7 +8,7 @@ import './App.css';
 
 
 
-const cardList = [
+const initialCardList = [
   {
     id:1,
     message: "Fake it until you make it",
@@ -57,6 +57,7 @@ function App() {
   const [selectedBoard, setSelectedBoard] = useState(null);
   //state to handle board Data
   const [boardData, setBoardData] = useState([]);
+  const [cardList, setCardList] = useState(initialCardList);
 
   useEffect(()=>{
     axios
@@ -94,6 +95,24 @@ function App() {
   const handleBoardSelection = (title, owner) => {
     setSelectedBoard({title, owner});
   };
+
+  const handleLike = (id) => {
+    setCardList((prevCardList) => {
+      return prevCardList.map((card) => {
+        if (id === card.id) {
+          return {
+            ...card,
+            likes: card.likes + 1,
+          };
+        } else {
+          return card;
+        }
+      });
+    });
+  };
+
+const handleDeleteCard = () => {
+};
   
 
   return (
@@ -146,7 +165,7 @@ function App() {
                 </div>
               )}
             </div>
-            <CardList cardData = {cardList}/>
+            <CardList cardData = {cardList} onLike={handleLike} onDeleteCard={handleDeleteCard}/>
           </div>
         )}
       </section>

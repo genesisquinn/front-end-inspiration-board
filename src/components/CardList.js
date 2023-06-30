@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './Card';
+import PropTypes from 'prop-types';
 
 const CardList = (props) => {
     return (
@@ -12,12 +13,22 @@ const CardList = (props) => {
                     likes={card.likes}
                     onLike={props.onLike} 
                     onDeleteCard={props.onDeleteCard}
-                    // need to add both these functions to App.js
                     />
             ))}
         </section>
     )
-}
+};
 
+CardList.propTypes = {
+    cardData: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            message: PropTypes.string.isRequired,
+            likes: PropTypes.number.isRequired
+        })
+    ).isRequired,
+    onLike: PropTypes.func,
+    onDeleteCard: PropTypes.func,
+};
 
 export default CardList;
