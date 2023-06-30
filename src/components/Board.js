@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Board = (props) => {
     const handleBoardClick = () => {
-        props.onBoardSelect(props.title, props.owner);
+        props.onBoardSelect(props.title, props.owner, props.id);
     };
 
     return(

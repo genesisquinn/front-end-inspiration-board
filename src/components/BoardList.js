@@ -14,11 +14,11 @@ const BoardList = (props) =>{
         console.log(props.boardData);
       };
     
-    const handleBoardSelection = (title, owner) => {
-        setSelectedBoard({ title, owner });
+    const handleBoardSelection = (title, owner, id) => {
+        setSelectedBoard({ title, owner, id });
         setIsOpen(false); // Hide the dropdown menu
         if (props.onBoardSelect) {
-          props.onBoardSelect(title, owner);
+          props.onBoardSelect(title, owner, id);
         }
     };
 
@@ -29,7 +29,7 @@ const BoardList = (props) =>{
         <button className='dropdown-btn' onClick={toggleDropdown}>
           Boards
         </button>
-        <ul className={`dropdown-menu ${showList}`}>
+        <ul className={`dropdown-menu dropdown-scroll-menu ${showList}`}>
           {props.boardData.map((board) => (
             <Board
               key = {board.id}

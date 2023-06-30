@@ -6,46 +6,6 @@ import NewBoardForm from './components/NewBoardForm.js';
 import NewCardForm from './components/NewCardForm.js';
 import './App.css';
 
-
-
-const initialCardList = [
-  {
-    id:1,
-    message: "Fake it until you make it",
-    likes: 3,
-    board_id: 1,
-  },
-  {
-    id:2,
-    message: "Fingilo hasta conseguirlo",
-    likes: 2,
-    board_id: 3,
-  },
-  {
-    id:3,
-    message: "a new message",
-    likes: 3,
-    board_id: 1,
-  },
-  {
-    id:4,
-    message: "un nuevo mensaje",
-    likes: 2,
-    board_id: 3,
-  },
-  {
-    id:5,
-    message: "another phrase",
-    likes: 3,
-    board_id: 1,
-  },
-  {
-    id:6,
-    message: "otra frase",
-    likes: 2,
-    board_id: 3,
-  },
-]
 const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
 
 const {REACT_APP_BACKEND_URL} = process.env;
@@ -57,7 +17,7 @@ function App() {
   const [selectedBoard, setSelectedBoard] = useState(null);
   //state to handle board Data
   const [boardData, setBoardData] = useState([]);
-  const [cardList, setCardList] = useState(initialCardList);
+  const [cardData, setCardData] = useState([]);
 
   useEffect(()=>{
     axios
@@ -76,6 +36,24 @@ function App() {
       .catch((err) => console.log(err));
   };
   
+  useEffect(() => {
+    if(selectedBoard){
+      fetchCards(selectedBoard.id);
+    }
+  }, [selectedBoard]);
+
+  const fetchCards = async (id) => {
+    console.log('Board ID:', id);
+    try{
+      if(selectedBoard) {
+        const response = await 
+          axios.get(`${REACT_APP_BACKEND_URL}/boards/${id}/cards`);
+          setCardData(response.data);
+      }
+    } catch(error){
+      console.log(error);
+    }
+  };
   const handleCreateNewCard = () => {
     setShowCardPopup(true);
   };
@@ -92,13 +70,15 @@ function App() {
     setShowCardPopup(false);
   };
 
-  const handleBoardSelection = (title, owner) => {
-    setSelectedBoard({title, owner});
+  const handleBoardSelection = (title, owner, id) => {
+    setSelectedBoard({title, owner, id});
+    console.log(selectedBoard);
+    fetchCards(id);
   };
 
   const handleLike = (id) => {
-    setCardList((prevCardList) => {
-      return prevCardList.map((card) => {
+    setCardData((prevCardData) => {
+      return prevCardData.map((card) => {
         if (id === card.id) {
           return {
             ...card,
@@ -165,7 +145,7 @@ const handleDeleteCard = () => {
                 </div>
               )}
             </div>
-            <CardList cardData = {cardList} onLike={handleLike} onDeleteCard={handleDeleteCard}/>
+            <CardList cardData = {cardData} boardId= {selectedBoard.id} onLike={handleLike} onDeleteCard={handleDeleteCard}/>
           </div>
         )}
       </section>
