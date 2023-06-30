@@ -54,8 +54,15 @@ function App() {
       console.log(error);
     }
   };
-  const handleCreateNewCard = () => {
-    setShowCardPopup(true);
+
+  const handleCreateNewCard = (data) => {
+    axios
+      .post(`${REACT_APP_BACKEND_URL}/boards/${selectedBoard.id}/cards`, data)
+      .then((res) => {
+        const newCard = res.data.card;
+        setCardData((prev) => [newCard, ...prev]);
+      })
+      .catch((err) => console.log(err));
   };
 
   const handleOpenPopup = () => {
@@ -64,6 +71,10 @@ function App() {
 
   const handleClosePopup = () => {
     setShowPopup(false);
+  };
+
+  const handleOpenCardPopup = () => {
+    setShowCardPopup(true);
   };
 
   const handleCloseCardPopup = () => {
@@ -91,7 +102,14 @@ function App() {
     });
   };
 
-const handleDeleteCard = () => {
+
+const handleDeleteCard = (id) => {
+  axios
+    .delete(`${REACT_APP_BACKEND_URL}/cards/${id}`)
+    .then((res) => {
+      setCardData((prev) => prev.filter((card) => card.id !== id));
+    })
+    .catch((err) => console.log(err));
 };
   
 
@@ -133,14 +151,14 @@ const handleDeleteCard = () => {
                 <p>By {selectedBoard.owner}</p>
               </div>
               <div className='menu-item menu-card'>
-                <button onClick={handleCreateNewCard}>Create A New Card</button>
+                <button onClick={handleOpenCardPopup}>Create A New Card</button>
               </div>
               {/* this handleCardSubmit will be used to pass the post request */}
               {showCardPopup && (
                 <div className='popup'>
                   <div className='popup-content'>
                     {/* this handleCardSubmit will be used to pass the post request */}
-                    <NewCardForm  handleCardSubmit={handleCloseCardPopup}/>
+                    <NewCardForm  handleCardSubmit={handleCreateNewCard} onClose={handleCloseCardPopup}/>
                   </div>
                 </div>
               )}
