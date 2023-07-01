@@ -14,7 +14,7 @@ const Card = (props) => {
                         icon={faHeart}
                         className="heart-icon"
                         size="2x" />
-                    <span className="heart-count">{props.likes}</span>
+                    <span className="heart-count">{props.likes_count}</span>
                 </div>
                 <button onClick={(event) => props.onLike(props.id)}>⬆️</button>
                 <button onClick={(event) => props.onDeleteCard(props.id)}>
@@ -28,7 +28,7 @@ const Card = (props) => {
 Card.propTypes = {
     id: PropTypes.number.isRequired,
     message: PropTypes.string.isRequired,
-    likes: PropTypes.number.isRequired,
+    likes_count: PropTypes.number.isRequired,
     onLike: PropTypes.func.isRequired,
     onDeleteCard: PropTypes.func.isRequired
 }

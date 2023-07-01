@@ -71,17 +71,16 @@
 .heart-container {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .heart-icon {
-  margin-right:-18px;
   color: rgb(224, 21, 204);
 }
 
 .heart-count {
   font-weight: bold;
-  display: flex;
-  align-items: center;
+  position: absolute;
 }
 
 /* Responsive styles for screens with a maximum width of 600px */
