@@ -20,20 +20,6 @@ const CardList = (props) => {
     )
 };
 
-// CardList.propTypes = {
-//     cardData: PropTypes.arrayOf(
-//         PropTypes.shape(
-//             {
-//                 id: PropTypes.number.isRequired,
-//                 message: PropTypes.string.isRequired,
-//                 likes: PropTypes.number.isRequired,
-//                 board_id: PropTypes.number.isRequired,
-//             };
-//       )
-//     ).isRequired,
-// };
-
-
 CardList.propTypes = {
     cardData: PropTypes.arrayOf(
         PropTypes.shape({

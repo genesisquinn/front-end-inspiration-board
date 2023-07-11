@@ -271,6 +271,7 @@
 
 .menu-card button{
   color:white;
+  margin: 10px;
 }
 .menu-card button::before{
   background-color: #4A929F;
@@ -315,4 +316,18 @@
     left: 27vh;
   }
 
+}
+
+.delete-menu button{
+  background-color: red;
+  color: white;
+  margin: 15px;
+}
+
+.delete-menu button::after{
+  background-color: black;
+}
+
+.delete-menu button::before{
+  background-color: red;
 }

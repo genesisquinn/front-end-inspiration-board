@@ -2,32 +2,30 @@ import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import './NewCardForm.css';
 
-const NewCardForm = ({handleCardSubmit}) => {
-    const[message, setMessage] = useState('');
-    // const[owner, setOwner] = useState('');
-    const[showForm, setShowForm] = useState(true);
+const kInitialFormData = {
+    message: '',
+  };
 
-    const handleMessageChange = (event) => {
-        setMessage(event.target.value);
-    }
+const NewCardForm = ({handleCardSubmit, onClose}) => {
+    const [formData, setFormData] = useState(kInitialFormData);
 
-    // const handleOwnerChange = (event) => {
-    //     setOwner(event.target.value);
-    //   };
+    const handleChange = (event) => {
+        const value = event.target.value;
+        const name= event.target.name;
+        setFormData(prev => ({
+            ...prev, [name]:value,
+        }));
+    };
     
     const handleFormSubmit = (event) => {
         event.preventDefault();
 
-        const newCard = {
-            message: message,
-        }
-
-        setMessage("");
-        handleCardSubmit();
+        handleCardSubmit({ ...formData });
+        onClose();
     };
     
     const handleClose =(event) =>{
-        setShowForm(false);
+        onClose();
     };
     return (
         <form className='new-board-form' onSubmit={handleFormSubmit}>
@@ -39,16 +37,12 @@ const NewCardForm = ({handleCardSubmit}) => {
             </div>
             <div className="form-group">
                 <label htmlFor="message">Message</label>
-                <input type = "text" id="message" name="boardTitle" value={message} onChange={handleMessageChange} />
+                <input type = "text" id="message" name="message" value={formData.message} onChange={handleChange} />
             </div>
-            {/* <div className="form-group">
-                <label htmlFor="owner">Owner's name</label>
-                <input type = "text" id="owner" name="boardOwner" value={owner} onChange={handleOwnerChange} />
-            </div> */}
+
             <div className="preview-section">
                 <h4>Preview:</h4>
-                <p>{message}</p>
-                {/* <p>{owner}</p> */}
+                <p>{formData.message}</p>
             </div>
             <input type="submit" value="Submit"/>
         </form>
@@ -58,6 +52,7 @@ const NewCardForm = ({handleCardSubmit}) => {
 
 NewCardForm.propTypes = {
     handleCardSubmit: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
 };
 
 export default NewCardForm;

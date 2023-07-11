@@ -13,6 +13,7 @@ const {REACT_APP_BACKEND_URL} = process.env;
 function App() {
   const [showPopup, setShowPopup] = useState(false);
   const [showCardPopup, setShowCardPopup] = useState(false);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
   //state to handle the selected board section
   const [selectedBoard, setSelectedBoard] = useState(null);
   //state to handle board Data
@@ -59,8 +60,10 @@ function App() {
     axios
       .post(`${REACT_APP_BACKEND_URL}/boards/${selectedBoard.id}/cards`, data)
       .then((res) => {
-        const newCard = res.data.card;
+        const newCard = res.data;
         setCardData((prev) => [newCard, ...prev]);
+        console.log(newCard); 
+        fetchCards(selectedBoard.id);// Refetch cards data after creating a new card
       })
       .catch((err) => console.log(err));
   };
@@ -80,6 +83,14 @@ function App() {
   const handleCloseCardPopup = () => {
     setShowCardPopup(false);
   };
+  
+  const handleOpenDeletePopup = () => {
+      setShowDeletePopup(true);
+  };
+
+  const handleCloseDeletePopup = () => {
+    setShowDeletePopup(false);
+};
 
   const handleBoardSelection = (title, owner, id) => {
     setSelectedBoard({title, owner, id});
@@ -102,7 +113,6 @@ function App() {
     });
   };
 
-
 const handleDeleteCard = (id) => {
   axios
     .delete(`${REACT_APP_BACKEND_URL}/cards/${id}`)
@@ -112,6 +122,16 @@ const handleDeleteCard = (id) => {
     .catch((err) => console.log(err));
 };
   
+const handleDeleteBoard = (id) => {
+  axios
+    .delete(`${REACT_APP_BACKEND_URL}/boards/${id}`)
+    .then((res) => {
+      setBoardData((prev) => prev.filter((board) => board.id !== id));
+      setSelectedBoard(null); // Reset selected board after deletion
+      setCardData([]); // Reset card data after deletion
+    })
+    .catch((err) => console.log(err));
+};
 
   return (
     <div className="App">
@@ -162,14 +182,24 @@ const handleDeleteCard = (id) => {
                   </div>
                 </div>
               )}
+              <div className='menu-item delete-menu'>
+                <button onClick={handleOpenDeletePopup}>delete current board?</button>
+              </div>
+              {showDeletePopup&& (
+                <div className='popup delete-board-popup'>
+                  <div className='popup-content delete-board-content'>
+                    <p> Are you sure you want to delete this board?</p>
+                    <button onClick={() => handleDeleteBoard(selectedBoard.id)}>Yes, delete</button>
+                    <button onClick={handleCloseDeletePopup}>Cancel</button> 
+                  </div>
+                </div>
+              )}
             </div>
             <CardList cardData = {cardData} boardId= {selectedBoard.id} onLike={handleLike} onDeleteCard={handleDeleteCard}/>
           </div>
         )}
       </section>
       <footer className='footer'>
-        {/*I added this button in case we want to delete them */}
-        <button>delete all boards?</button>
         <h1>Created by: {creators.join(', ')}</h1>
       </footer>
     </div>
