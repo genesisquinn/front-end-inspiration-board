@@ -10,6 +10,11 @@ const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
 
 const {REACT_APP_BACKEND_URL} = process.env;
 
+const convertCard = ({ likes_count, ...card }) => ({
+  ...card,
+  likes_count: likes_count,
+});
+
 function App() {
   const [showPopup, setShowPopup] = useState(false);
   const [showCardPopup, setShowCardPopup] = useState(false);
@@ -99,18 +104,22 @@ function App() {
   };
 
   const handleLike = (id) => {
-    setCardData((prevCardData) => {
-      return prevCardData.map((card) => {
-        if (id === card.id) {
-          return {
-            ...card,
-            likes: card.likes + 1,
-          };
-        } else {
-          return card;
-        }
-      });
-    });
+    return axios
+      .patch(`${REACT_APP_BACKEND_URL}/cards/${id}/like`)
+      .then((res) => {
+        // console.log(res.data);
+        const updatedCard = convertCard(res.data);
+        setCardData((prev) => {
+          return prev.map((card) => {
+            if (id === card.id) {
+              return updatedCard;
+            } else {
+              return card;
+            }
+          });
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
 const handleDeleteCard = (id) => {
