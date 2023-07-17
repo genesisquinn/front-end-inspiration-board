@@ -93,8 +93,11 @@ function App() {
       setShowDeletePopup(true);
   };
 
+
   const handleCloseDeletePopup = () => {
     setShowDeletePopup(false);
+    // setSelectedBoard(null);
+    // setCardData([]);
 };
 
   const handleBoardSelection = (title, owner, id) => {
@@ -138,6 +141,7 @@ const handleDeleteBoard = (id) => {
       setBoardData((prev) => prev.filter((board) => board.id !== id));
       setSelectedBoard(null); // Reset selected board after deletion
       setCardData([]); // Reset card data after deletion
+      handleCloseDeletePopup(); //Close the delete board popup after deletion
     })
     .catch((err) => console.log(err));
 };
