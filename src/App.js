@@ -202,8 +202,8 @@ const handleDeleteBoard = (id) => {
                 <div className='popup delete-board-popup'>
                   <div className='popup-content delete-board-content'>
                     <p> Are you sure you want to delete this board?</p>
-                    <button onClick={() => handleDeleteBoard(selectedBoard.id)}>Yes, delete</button>
-                    <button onClick={handleCloseDeletePopup}>Cancel</button> 
+                    <button className="delete-button" onClick={() => handleDeleteBoard(selectedBoard.id)}>Yes, delete</button>
+                    <button className="cancel-button" onClick={handleCloseDeletePopup}>Cancel</button> 
                   </div>
                 </div>
               )}
