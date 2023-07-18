@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Card = (props) => {
     return (
-        <div className="card">
+        <div className="card" data-testid= "card-component">
             <h2>{props.message}</h2>
             <section>
                 <div className="heart-container">
@@ -17,7 +17,7 @@ const Card = (props) => {
                     <span className="heart-count">{props.likes_count}</span>
                 </div>
                 <button onClick={(event) => props.onLike(props.id)}>⬆️</button>
-                <button onClick={(event) => props.onDeleteCard(props.id)}>
+                <button onClick={(event) => props.onDeleteCard(props.id)} data-testid= "delete-button">
                     <FontAwesomeIcon icon={faTrashCan} className="trash-icon" size="2x" />
                 </button>
             </section>
