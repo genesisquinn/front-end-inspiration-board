@@ -158,12 +158,18 @@ function App() {
     return cards.slice().sort((a, b) => a.message.localeCompare(b.message));
   };
   
+  //Function to sort cards based on the number of likes
+  const sortCardsByLikes = (cards) => {
+    return cards.slice().sort((a, b)=> b.likes_count - a.likes_count);
+  };
   // Function to sort cards based on the selected sorting option
   const sortCards = (cards) => {
     if (sortingOption === 'id') {
       return sortCardsById(cards);
     } else if (sortingOption === 'alphabetical') {
       return sortCardsAlphabetically(cards);
+    } else if (sortingOption == 'likes'){
+      return sortCardsByLikes(cards);
     }
     return cards; // Return the original cards if no sorting option matches
   };

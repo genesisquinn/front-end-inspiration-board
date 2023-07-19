@@ -1,0 +1,18 @@
+.sorting-selection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sorting-selection span {
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sorting-selection select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
