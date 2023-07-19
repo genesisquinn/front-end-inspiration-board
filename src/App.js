@@ -4,6 +4,7 @@ import BoardList from './components/BoardList.js';
 import CardList from './components/CardList.js';
 import NewBoardForm from './components/NewBoardForm.js';
 import NewCardForm from './components/NewCardForm.js';
+import SortCards from './components/SortCards.js';
 import './App.css';
 
 const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
@@ -24,6 +25,8 @@ function App() {
   //state to handle board Data
   const [boardData, setBoardData] = useState([]);
   const [cardData, setCardData] = useState([]);
+  //state to sort cards Data
+  const [sortingOption, setSortingOption] = useState('id');
 
   useEffect(()=>{
     axios
@@ -125,26 +128,45 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-const handleDeleteCard = (id) => {
-  axios
-    .delete(`${REACT_APP_BACKEND_URL}/cards/${id}`)
-    .then((res) => {
-      setCardData((prev) => prev.filter((card) => card.id !== id));
-    })
-    .catch((err) => console.log(err));
-};
+  const handleDeleteCard = (id) => {
+    axios
+      .delete(`${REACT_APP_BACKEND_URL}/cards/${id}`)
+      .then((res) => {
+        setCardData((prev) => prev.filter((card) => card.id !== id));
+      })
+      .catch((err) => console.log(err));
+  };
+    
+  const handleDeleteBoard = (id) => {
+    axios
+      .delete(`${REACT_APP_BACKEND_URL}/boards/${id}`)
+      .then((res) => {
+        setBoardData((prev) => prev.filter((board) => board.id !== id));
+        setSelectedBoard(null); // Reset selected board after deletion
+        setCardData([]); // Reset card data after deletion
+        handleCloseDeletePopup(); //Close the delete board popup after deletion
+      })
+      .catch((err) => console.log(err));
+  };
+  // Function to sort cards based on ID
+  const sortCardsById = (cards) => {
+    return cards.slice().sort((a, b) => a.id - b.id);
+  };
   
-const handleDeleteBoard = (id) => {
-  axios
-    .delete(`${REACT_APP_BACKEND_URL}/boards/${id}`)
-    .then((res) => {
-      setBoardData((prev) => prev.filter((board) => board.id !== id));
-      setSelectedBoard(null); // Reset selected board after deletion
-      setCardData([]); // Reset card data after deletion
-      handleCloseDeletePopup(); //Close the delete board popup after deletion
-    })
-    .catch((err) => console.log(err));
-};
+  // Function to sort cards alphabetically
+  const sortCardsAlphabetically = (cards) => {
+    return cards.slice().sort((a, b) => a.message.localeCompare(b.message));
+  };
+  
+  // Function to sort cards based on the selected sorting option
+  const sortCards = (cards) => {
+    if (sortingOption === 'id') {
+      return sortCardsById(cards);
+    } else if (sortingOption === 'alphabetical') {
+      return sortCardsAlphabetically(cards);
+    }
+    return cards; // Return the original cards if no sorting option matches
+  };
 
   return (
     <div className="App">
@@ -183,6 +205,7 @@ const handleDeleteBoard = (id) => {
                 <h3>Cards for {selectedBoard.title}</h3>
                 <p>By {selectedBoard.owner}</p>
               </div>
+              <SortCards sortingOption={sortingOption} setSortingOption={setSortingOption}/>
               <div className='menu-item menu-card'>
                 <button onClick={handleOpenCardPopup}>Create A New Card</button>
               </div>
@@ -208,7 +231,11 @@ const handleDeleteBoard = (id) => {
                 </div>
               )}
             </div>
-            <CardList cardData = {cardData} boardId= {selectedBoard.id} onLike={handleLike} onDeleteCard={handleDeleteCard}/>
+            <CardList 
+              cardData = {sortCards(cardData)} 
+              boardId= {selectedBoard.id} 
+              onLike={handleLike} 
+              onDeleteCard={handleDeleteCard}/>
           </div>
         )}
       </section>
