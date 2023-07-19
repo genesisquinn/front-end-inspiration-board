@@ -3,11 +3,11 @@ import './SortCards.css';
 const SortCards = ({sortingOption, setSortingOption}) => {
     return(
         <div className='sorting-selection'>
-            <span>Sort Cards by</span>
+            <span>Sort Cards</span>
             <select value={sortingOption} onChange={(e)=> setSortingOption(e.target.value)}>
-                <option value="id">ID</option>
+                <option value="id">by ID</option>
                 <option value="alphabetical">Alphabetically</option>
-                <option value="likes">Number of likes</option>
+                <option value="likes">by Number of likes</option>
             </select>
         </div>
     );
