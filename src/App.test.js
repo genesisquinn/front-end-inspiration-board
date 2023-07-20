@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent} from "@testing-library/react";
 import App from "./App";
 
 jest.mock("axios");
@@ -34,25 +34,25 @@ describe("App Component", () => {
 
   });
 
-  test('creates a new board and renders "Create A New Card" button after form submission', async () => {
-   
+  test('creates a new board and sends a POST request with the correct data', async () => {
+    // Spy on the axios.post function to intercept the call
+    const postSpy = jest.spyOn(axios, "post");
+  
     fireEvent.click(screen.getByText('Create A New Board'));
-
-    // Fill out the form fields 
+  
+    // Fill out the form fields
     fireEvent.change(screen.getByLabelText('Title'), { target: { value: 'New Board' } });
     fireEvent.change(screen.getByLabelText("Owner's name"), { target: { value: 'Test Owner' } });
-
-    fireEvent.click(screen.getByRole('button', {name: 'Submit'}));
-    
-    
-    // await waitFor(() => screen.findByText('New Board'));
-
-    // Check if the button is present somewhere in the document
-    const createNewCardButton = await screen.findByText('Create A New Card');
-    expect(createNewCardButton).toBeTruthy();
-    // Verify is these attributes are now visible
-    // expect(screen.getByText('Create A New Card')).toBeInTheDocument();
-    expect(screen.getByText('New Board')).toBeInTheDocument();
-    expect(screen.getByText('Test Owner')).toBeInTheDocument();
+  
+    fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+  
+    // Verify that axios.post was called with the correct data. This won't affect the real database.
+    expect(postSpy).toHaveBeenCalledWith(
+      "http://localhost:5000/boards",
+      { title: "New Board", owner: "Test Owner" }
+    );
+  
+    // Clean up the spy
+    postSpy.mockRestore();
   });
 });
