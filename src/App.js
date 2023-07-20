@@ -50,7 +50,7 @@ function App() {
     if(selectedBoard){
       fetchCards(selectedBoard.id);
     }
-  }, [selectedBoard]);
+  },); //[selectedBoard]);
 
   const fetchCards = async (id) => {
     console.log('Board ID:', id);
@@ -169,7 +169,7 @@ function App() {
       return sortCardsById(cards);
     } else if (sortingOption === 'alphabetical') {
       return sortCardsAlphabetically(cards);
-    } else if (sortingOption == 'likes'){
+    } else if (sortingOption === 'likes'){
       return sortCardsByLikes(cards);
     }
     return cards; // Return the original cards if no sorting option matches
