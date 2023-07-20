@@ -9,7 +9,8 @@ import './App.css';
 
 const creators = ['Alyssa', 'G', 'Aisha', 'Theffy'];
 
-const {REACT_APP_BACKEND_URL} = process.env;
+// const {REACT_APP_BACKEND_URL} = process.env;
+const REACT_APP_BACKEND_URL = 'https://gaat-inspiration-board.onrender.com';
 
 const convertCard = ({ likes_count, ...card }) => ({
   ...card,
