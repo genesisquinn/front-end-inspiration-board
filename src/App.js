@@ -50,7 +50,7 @@ function App() {
     if(selectedBoard){
       fetchCards(selectedBoard.id);
     }
-  },); //[selectedBoard]);
+  },[selectedBoard]); //[selectedBoard]);
 
   const fetchCards = async (id) => {
     console.log('Board ID:', id);
